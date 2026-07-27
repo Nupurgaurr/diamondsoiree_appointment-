@@ -48,7 +48,15 @@
   .btn-solid:hover{background:transparent;color:var(--ink);}
   .btn-line{background:transparent;color:var(--ink);}
   .btn-line:hover{background:var(--ink);color:var(--on-ink);}
-  @media (max-width:900px){.navlinks{display:none;}}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+  .nav-toggle svg{width:24px;height:24px;stroke:#111;stroke-width:1.6;fill:none;}
+  @media (max-width:900px){
+    .navrow{position:relative;}
+    .nav-toggle{display:inline-flex;}
+    .navlinks{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:#fff;padding:12px 20px;border-top:1px solid #eee;z-index:50;}
+    .navlinks.open{display:flex;}
+    .navlinks a{padding:12px 0;border-bottom:1px solid #f0f0f0;}
+  }
 
   .apt-head{padding:64px 0 0;text-align:center;}
   .apt-head .eyebrow{color:var(--mist-deep);}
@@ -104,6 +112,9 @@
 
 <header class="site">
   <div class="navrow">
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <nav class="navlinks">
       <a href="#">About Us</a>
       <a href="plp.html">Shop</a>
@@ -212,5 +223,14 @@
     <span>Privacy Policy &nbsp;·&nbsp; Terms &amp; Conditions</span>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.nav-toggle').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const nav=btn.nextElementSibling;
+    const open=nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+  });
+});
+</script>
 </body>
 </html>
